@@ -3,12 +3,9 @@ package com.example.dscommerce.dto;
 import com.example.dscommerce.entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.parameters.P;
 
-@Getter
 @AllArgsConstructor
-@NoArgsConstructor
+@Getter
 public class ProductMinDTO {
 
     private Long id;

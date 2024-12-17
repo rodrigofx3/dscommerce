@@ -2,15 +2,19 @@ package com.example.dscommerce.dto;
 
 import com.example.dscommerce.entities.Product;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 public class ProductDTO {
 
     private Long id;
@@ -23,6 +27,8 @@ public class ProductDTO {
     @Positive(message = "O preço deve ser positivo")
     private Double price;
     private String imgUrl;
+    @NotEmpty(message = "Categoria requerida")
+    private List<CategoryDTO> categories = new ArrayList<>();
 
     public ProductDTO(Product entity) {
         id = entity.getId();
@@ -30,6 +36,7 @@ public class ProductDTO {
         description = entity.getDescription();
         price = entity.getPrice();
         imgUrl = entity.getImgUrl();
+        entity.getCategories().forEach(category -> categories.add(new CategoryDTO(category)));
     }
 
 }

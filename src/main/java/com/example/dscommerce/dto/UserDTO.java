@@ -3,14 +3,12 @@ package com.example.dscommerce.dto;
 import com.example.dscommerce.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 public class UserDTO {
 
     private Long id;
