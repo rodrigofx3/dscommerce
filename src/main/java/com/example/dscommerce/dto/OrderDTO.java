@@ -1,6 +1,7 @@
 package com.example.dscommerce.dto;
 
 import com.example.dscommerce.entities.Order;
+import com.example.dscommerce.entities.OrderItem;
 import com.example.dscommerce.entities.OrderStatus;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -11,9 +12,9 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 public class OrderDTO {
 
     private Long id;
@@ -30,7 +31,9 @@ public class OrderDTO {
         status = entity.getStatus();
         client = new ClientDTO(entity.getClient());
         payment = (entity.getPayment() == null) ? null : new PaymentDTO(entity.getPayment());
-        entity.getItems().forEach(item -> items.add(new OrderItemDTO(item)));
+        for (OrderItem item : entity.getItems()) {
+            items.add(new OrderItemDTO(item));
+        }
     }
 
     public Double getTotal() {

@@ -5,8 +5,8 @@ import lombok.Getter;
 
 import java.time.Instant;
 
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
 public class CustomErrorDTO {
 
     private Instant timestamp;

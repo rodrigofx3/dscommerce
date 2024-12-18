@@ -3,6 +3,7 @@ package com.example.dscommerce.dto;
 import com.example.dscommerce.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,9 @@ public class UserDTO {
         email = entity.getEmail();
         phone = entity.getPhone();
         birthDate = entity.getBirthDate().toString();
-        entity.getRoles().forEach(role -> roles.add(role.getAuthority()));
+        for (GrantedAuthority role : entity.getAuthorities()) {
+            roles.add(role.getAuthority());
+        }
     }
 
 }

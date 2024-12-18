@@ -1,10 +1,8 @@
 package com.example.dscommerce.dto;
 
+import com.example.dscommerce.entities.Category;
 import com.example.dscommerce.entities.Product;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +22,7 @@ public class ProductDTO {
     @Size(min = 10, message = "Descrição precisa ter no mínimo 10 caracteres")
     @NotBlank(message = "Campo requerido")
     private String description;
+    @NotNull(message = "Campo requerido")
     @Positive(message = "O preço deve ser positivo")
     private Double price;
     private String imgUrl;
@@ -36,7 +35,9 @@ public class ProductDTO {
         description = entity.getDescription();
         price = entity.getPrice();
         imgUrl = entity.getImgUrl();
-        entity.getCategories().forEach(category -> categories.add(new CategoryDTO(category)));
+        for (Category category : entity.getCategories()) {
+            categories.add(new CategoryDTO(category));
+        }
     }
 
 }

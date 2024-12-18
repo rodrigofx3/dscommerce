@@ -4,8 +4,8 @@ import com.example.dscommerce.entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
 public class ProductMinDTO {
 
     private Long id;
