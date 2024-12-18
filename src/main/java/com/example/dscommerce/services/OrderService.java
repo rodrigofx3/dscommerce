@@ -26,16 +26,20 @@ public class OrderService {
 
     private final OrderItemRepository OrderItemRepository;
 
-    public OrderService(OrderRepository repository, UserService userService, ProductRepository productRepository, com.example.dscommerce.repositories.OrderItemRepository orderItemRepository) {
+    private final AuthService authService;
+
+    public OrderService(OrderRepository repository, UserService userService, ProductRepository productRepository, com.example.dscommerce.repositories.OrderItemRepository orderItemRepository, AuthService authService) {
         this.orderRepository = repository;
         this.userService = userService;
         this.productRepository = productRepository;
         OrderItemRepository = orderItemRepository;
+        this.authService = authService;
     }
 
     @Transactional(readOnly = true)
     public OrderDTO findById(Long id) {
         Order entity = orderRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource with ID " + id + " not found."));
+        authService.validateSelfOrAdmin(entity.getClient().getId());
         return new OrderDTO(entity);
     }
 
